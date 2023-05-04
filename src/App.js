@@ -2,8 +2,8 @@
 import Right from "./components/Right";
 import { useState, useEffect } from "react";
 import AcquireImage from "./components/AcquireImage";
-import Dynamsoft from 'dwt';
-import { PDFDocument } from 'pdf-lib';
+import Dynamsoft from "dwt";
+import { PDFDocument } from "pdf-lib";
 
 function App() {
   const [sources, setSources] = useState([]);
@@ -12,25 +12,24 @@ function App() {
   const [autoFeeder, setAutoFeeder] = useState(false);
   const [pixelType, setPixelType] = useState("black-white");
   const [resolution, setResolution] = useState(300);
- 
 
   // to load Dynamsoft library and get scanner devices in select source
   useEffect(() => {
-    Dynamsoft.DWT.Containers = [{ ContainerId: "dwtcontrolContainer", Width: "100%", Height: "100%" }];
+    Dynamsoft.DWT.Containers = [
+      { ContainerId: "dwtcontrolContainer", Width: "100%", Height: "100%" },
+    ];
     Dynamsoft.DWT.AutoLoad = false;
-    Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', async () => {
+    Dynamsoft.DWT.RegisterEvent("OnWebTwainReady", async () => {
       const devices = await Dynamsoft.DWT.DefaultSources;
       setSources(devices);
-      setSelectedSource(devices[0]?.name || '');
-    }); 
+      setSelectedSource(devices[0]?.name || "");
+    });
     Dynamsoft.DWT.Load();
   }, []);
 
-
   function handleSourceChange(event) {
-    setSelectedSource(event.target.value);  
+    setSelectedSource(event.target.value);
   }
-
 
   function onShowUIChange() {
     setShowUI(!showUI);
@@ -49,7 +48,6 @@ function App() {
     setResolution(event.target.value);
   }
 
-  
   async function handleScanAndSave1() {
     // const pdfDoc = await PDFDocument.create();
     // await Dynamsoft.DWT.acquireImage({
@@ -90,9 +88,8 @@ function App() {
     });
   }
 
-  
   function handleRemoveBlankImages() {
-    const imageViewer = Dynamsoft.DWT.GetViewer('dwtcontrolContainer');
+    const imageViewer = Dynamsoft.DWT.GetViewer("dwtcontrolContainer");
     const images = imageViewer.getAll();
     images.forEach((image) => {
       const bitmap = image.getInnerBitmap();
@@ -101,18 +98,15 @@ function App() {
       }
     });
   }
-  
 
   function handleRemoveAllImages() {
-    const imageViewer = Dynamsoft.DWT.GetViewer('dwtcontrolContainer');
+    const imageViewer = Dynamsoft.DWT.GetViewer("dwtcontrolContainer");
     imageViewer.removeAll();
   }
 
   return (
-    <div className="flex h-screen w-screen  m-10 border rounded-lg"> 
-      <AcquireImage
-productKey="t0186SwUAAJ+c0ZI/kn7CtY0a1UYA5/GKvWY99lK5pIgRX5zeI+bSDSDu73uNNPwVTlgQxwbO4X/7cGGHueg1PKK31kQtlZxWy3Sfbi0tj9HqeS1q7YwhWrJDhsBnuwVcCG3cv4TSrYZX4BkAPQ7kACgHYjsF8NI92zIkAPcA7QBx0k3ga5P11ra4mhp+HS+aTh7g1Oud+cVe48zP9V+nv1W/RHkraIkA5VtOAO4B2gHiABLACowl4z6n7Al3"
-/>
+    <div className="flex h-screen w-screen  m-10 border rounded-lg">
+      <AcquireImage productKey="t0186SwUAAJ+c0ZI/kn7CtY0a1UYA5/GKvWY99lK5pIgRX5zeI+bSDSDu73uNNPwVTlgQxwbO4X/7cGGHueg1PKK31kQtlZxWy3Sfbi0tj9HqeS1q7YwhWrJDhsBnuwVcCG3cv4TSrYZX4BkAPQ7kACgHYjsF8NI92zIkAPcA7QBx0k3ga5P11ra4mhp+HS+aTh7g1Oud+cVe48zP9V+nv1W/RHkraIkA5VtOAO4B2gHiABLACowl4z6n7Al3" />
       <Right
         productKey="t0186SwUAAJ+c0ZI/kn7CtY0a1UYA5/GKvWY99lK5pIgRX5zeI+bSDSDu73uNNPwVTlgQxwbO4X/7cGGHueg1PKK31kQtlZxWy3Sfbi0tj9HqeS1q7YwhWrJDhsBnuwVcCG3cv4TSrYZX4BkAPQ7kACgHYjsF8NI92zIkAPcA7QBx0k3ga5P11ra4mhp+HS+aTh7g1Oud+cVe48zP9V+nv1W/RHkraIkA5VtOAO4B2gHiABLACowl4z6n7Al3"
         sources={sources}
@@ -135,4 +129,4 @@ productKey="t0186SwUAAJ+c0ZI/kn7CtY0a1UYA5/GKvWY99lK5pIgRX5zeI+bSDSDu73uNNPwVTlg
   );
 }
 
-export default App
+export default App;

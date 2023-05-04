@@ -23,6 +23,7 @@ const AcquireImage = ({ productKey }) => {
     checkScriptLoaded();
   };
 
+  
   return (
     <div className="w-1/2 h-full bg-gray-200 p-4">
       <div style={{ height: "600px", overflowY: "scroll" }}>

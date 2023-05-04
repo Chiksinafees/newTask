@@ -54,7 +54,6 @@ function Right(props) {
     loadDWT();
   }, []);
 
-
   const loadDWT = () => {
     Dynamsoft.DWT.ProductKey = productKey;
     Dynamsoft.DWT.ResourcesPath = "dwt-resources";
@@ -73,11 +72,9 @@ function Right(props) {
     checkScriptLoaded();
   };
 
-
   const setErrorMessage = (errorMessage) => {
     //  error message state
   };
-
 
   async function acquireImage() {
     return new Promise((resolve, reject) => {
@@ -127,7 +124,6 @@ function Right(props) {
       );
     });
   }
-
 
   const ScanAndSave2 = async () => {
     if (!DWObject) {
@@ -331,7 +327,7 @@ function Right(props) {
       <button
         className="bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 rounded-md mr-2 mb-4 w-40"
         onClick={RemoveBlankImages}
-      > 
+      >
         Remove Blank Images
       </button>
       <button
